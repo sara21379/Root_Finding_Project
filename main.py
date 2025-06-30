@@ -16,57 +16,57 @@ def main():
 
     choice = input("Enter method number (1-3): ").strip()
     if choice not in ['1', '2', '3']:
-        print("❌ Invalid method number. Please choose 1, 2, or 3.")
+        print(" Invalid method number. Please choose 1, 2, or 3.")
         return
 
     try:
         start = float(input("Enter lower end of the range: "))
         end = float(input("Enter upper end of the range: "))
     except ValueError:
-        print("❌ Invalid input. Range bounds must be numeric.")
+        print(" Invalid input. Range bounds must be numeric.")
         return
 
     if start == end:
-        print("❌ Range cannot have identical start and end values.")
+        print(" Range cannot have identical start and end values.")
         return
     elif start > end:
         start, end = end, start  # Swap if reversed
 
-    # 🔒 Limit range span
+    #  Limit range span
     if end - start > 1_000_000:
-        print("❌ The range is too large. Please choose a smaller interval.")
+        print(" The range is too large. Please choose a smaller interval.")
         return
 
     try:
         step = float(input("Enter step size (e.g. 0.1): "))
     except ValueError:
-        print("❌ Invalid input. Step size must be numeric.")
+        print(" Invalid input. Step size must be numeric.")
         return
 
     if step <= 0:
-        print("❌ Step size must be greater than 0.")
+        print(" Step size must be greater than 0.")
         return
     elif step > (end - start):
-        print("❌ Step size is too large for the given range.")
+        print(" Step size is too large for the given range.")
         return
 
-    # 🔒 Limit expected iterations
+    #  Limit expected iterations
     max_steps = int((end - start) / step)
     if max_steps > 100_000:
-        print("❌ Too many iterations expected. Please increase step size or reduce range.")
+        print(" Too many iterations expected. Please increase step size or reduce range.")
         return
 
     try:
         epsilon = float(input("Enter epsilon precision level (e.g. 0.0001): "))
     except ValueError:
-        print("❌ Invalid input. Epsilon must be numeric.")
+        print(" Invalid input. Epsilon must be numeric.")
         return
 
     if epsilon <= 0:
-        print("❌ Epsilon must be greater than 0.")
+        print(" Epsilon must be greater than 0.")
         return
     elif epsilon > 1:
-        print("❌ Epsilon is too large. Please choose a smaller value like 0.0001.")
+        print(" Epsilon is too large. Please choose a smaller value like 0.0001.")
         return
 
     x = start
@@ -82,7 +82,7 @@ def main():
             fpx1 = f_prime(x1)
             fpx2 = f_prime(x2)
         except Exception as e:
-            print(f"⚠️ Error evaluating function: {e}")
+            print(f" Error evaluating function: {e}")
             return
 
         # Case 1: function changes sign
@@ -116,7 +116,7 @@ def main():
         x += step
 
     if not found_any:
-        print("\n⚠️ No roots were found within the given range.")
+        print("\n No roots were found within the given range.")
 
 if __name__ == "__main__":
     main()
